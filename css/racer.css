@@ -1,0 +1,76 @@
+
+div.race-container {
+    position: relative;
+}
+
+div.racers{
+    position: absolute;
+    width: calc(90% - 80px);
+    margin-left: 20px;
+    transition: top 1s ease-out;
+
+}
+div.background{
+    position: absolute;
+    width: 100%;
+}
+
+div.racer {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    transition: left 5s ease-in, opacity 1s ease-out, top 1s ease-out;
+}
+div.racer.left {
+    transform: translateX(-100%);
+}
+
+div.racer span {
+    font-family: BurbankBigCondensedBold;
+    color: white;
+    border-width: 2px;
+    text-shadow: 2px 2px 0 #000000, -2px 2px 0 #000000, 2px -2px 0 #000000, -2px -2px 0 #000000, 0px 2px 0 #000000, 0px -2px 0 #000000, -2px 0px 0 #000000, 2px 0px 0 #000000;
+    font-size: 30px;
+    padding-top: 12px;
+}
+div.racer div.avatar-container {
+    width: 48px;
+    height: 64px;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    order: 2;
+    padding-top: 16px;
+}
+div.racer img {
+    display: block;
+    position: absolute;
+    max-height: 100%;
+    max-width: 100%;
+}
+div.racer img.avatar{
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    margin-top: 8px;
+    margin-left: 8px;
+}
+div.racer img.overlay{
+    width: 48px;
+    height: 48px;
+    margin-top: -20px;
+}
+div.racer span.position {
+    order: 1;
+    opacity: 1;
+}
+div.racer span.username {
+    order: 3;
+}
+div.racer.left span.position {
+    order: 3;
+    opacity: 0;
+}
+div.racer.left span.username {
+    order: 1;
+}

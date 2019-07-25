@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="">
+
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css"
+        rel="stylesheet">
+    <link href="css/race.css" rel="stylesheet">
+    <link href="css/racer.css" rel="stylesheet">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-resource.js"></script>
+<script src="js/carina.js"></script>
+<script src="js/reconnecting-websocket.js"></script>
+<script src="js/app.js"></script>
+
+<body ng-app="app" ng-controller="HelloWorldCtrl">
+    <!-- <h1>Hello</h1> -->
+
+    <div class="container" ng-show="showForm">
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-4">
+                <form style="padding-top: 20px; padding-bottom: 20px;">
+                    <!-- <div class="form-group">
+                        <div class="btn-group btn-group-justified" role="group">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default" ng-click="modeToggle()"
+                                    ng-class="{'btn-primary': showMeter}">Meter</button>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default" ng-click="modeToggle()"
+                                    ng-class="{'btn-primary': !showMeter}">Race</button>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="form-group" ng-show="!showMeter">
+                        <div class="btn-group btn-group-justified" role="group">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default" ng-click="showPool = !showPool"
+                                    ng-class="{'btn-primary': !showPool}">Track</button>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default" ng-click="showPool = !showPool"
+                                    ng-class="{'btn-primary': showPool}">Pool</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientid">Client id:</label>
+                        <input type="text" class="form-control" name="clientid" ng-model="state.clientid" />
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" class="form-control" ng-model="state.username" />
+                    </div>
+                    <div class="form-group" ng-show="!showMeter">
+                        <label for="leaderboardSize">Num Lanes:</label>
+                        <input type="text" name="leaderboardSize" class="form-control" ng-model="leaderboardSize" />
+                    </div>
+                    <div class="form-group" ng-show="!showMeter">
+                        <label for="raceMinSparks">Min Sparks %:</label>
+                        <input type="text" name="raceMinSparks" class="form-control" ng-model="raceMinSparks" />
+                    </div>
+                    <div class="form-group" ng-show="!showMeter">
+                        <label for="raceMaxSparks">Max Sparks %:</label>
+                        <input type="text" name="raceMaxSparks" class="form-control" ng-model="raceMaxSparks" />
+                    </div>
+
+                    <button class="btn btn-primary" ng-click="save()">Save</button>
+                    <button class="btn btn-default" ng-click="startRace()" ng-show="!showMeter">Start</button>
+                    <button class="btn btn-default" ng-click="shake(100)" ng-show="showMeter">Shake</button>
+                    <!-- <button class="btn btn-default" ng-click="move()">Move</button> -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="race-container" ng-show2="!showMeter">
+        <div class="background fixed-full2" ng-class="{track: !showPool, pool: showPool}">
+            <div class="lane row">
+                <button type="button" class="btn btn-default" ng-click="showForm = !showForm">
+                    <span class="oi oi-wrench"></span>
+                </button>
+            </div>
+            <div class="lanes">
+                <div ng-repeat="n in [] | range:leaderboardSize" class="lane inset">
+                    <div class="finish"></div>
+                </div>
+            </div>
+            <div class="lane"></div>
+        </div>
+
+        <div class="racers">
+            <div ng-repeat="chatUser in chatUsers | filter: chatFilter track by chatUser.username" class="racer left2"
+                ng-class="{'left2': chatUser.leftText}"
+                ng-style="{'top': getUserTop(chatUser), 'left': getUserLeft(chatUser), 'opacity': chatUser.show ? 100 : 0}"
+                ng-click="move(chatUser, 100000)">
+                <span class="position">{{chatUser.placed}}</span>
+                <div class="avatar-container">
+                    <img src="{{chatUser.avatarUrl}}?w=64&h=64" class="avatar" />
+                    <img src="img/RebelHat.png" class="overlay" />
+                </div>
+                <span class="username">{{chatUser.username}}</span>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

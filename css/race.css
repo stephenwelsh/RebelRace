@@ -1,0 +1,77 @@
+:root{
+    --lanes-radius: 15px;
+    --track-inset-color: black;
+    --pool-inset-color: grey;
+    --lane-inset-color: white;
+    --lane-height: 64px;
+}
+
+.pool.background {
+    background: url("../img/pool-tile.jpg") center/20%;
+    box-shadow: inset 0px 0px 6px 3px var(--pool-inset-color);
+}
+.pool div.lane.inset {
+    background: url("../img/water.jpg") center/10%;
+}
+div .pool .background .inset {
+    box-shadow: inset 0px 0px 6px 3px var(--pool-inset-color);
+}
+.pool div.lanes {
+    box-shadow: 0px 0px 12px 3px var(--pool-inset-color);
+}
+
+.track.background {
+    background: url("../img/grass.jpg") center/20%;
+    box-shadow: inset 0px 0px 6px 3px var(--track-inset-color);
+}
+.track .lane.inset {
+    background: url("../img/track.jpg") center/10%;
+}
+div .track .background .inset {
+    box-shadow: inset 0px 0px 6px 3px var(--track-inset-color);
+}
+.track div.lanes {
+    box-shadow: 0px 0px 12px 3px var(--track-inset-color);
+}
+
+div.fixed-full {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+
+div.lane.row {
+    padding-top: 16px;
+    text-align: right;
+}
+
+div.lane.inset {
+    box-shadow: inset 0px 0px 4px 3px var(--lane-inset-color);
+}
+
+div.lanes {
+    border-radius: var(--lanes-radius);
+    margin: 0px 20px 0px 20px;
+}
+.lanes div.finish {
+    width: 90%;
+    height: 64px;
+    border-right-color: var(--lane-inset-color);
+    border-right-width: 3px;
+    border-right-style: solid;
+}
+
+div.lane {
+    height: var(--lane-height);
+    width: 100%;
+}
+
+div.lane:first-child{
+    border-top-left-radius: var(--lanes-radius);
+    border-top-right-radius: var(--lanes-radius);
+}
+
+div.lane:last-child{
+    border-bottom-left-radius: var(--lanes-radius);
+    border-bottom-right-radius: var(--lanes-radius);
+}
