@@ -177,7 +177,7 @@ app.controller("HelloWorldCtrl", function($scope, $timeout, MixerApi, MixerChatA
             console.log(`User '${user.userId}' spent: ${spent}`);
             var userSpent = Math.min($scope.raceSparkGoal*50,spent);
             user.spent += userSpent;
-            if(user.spent >= user.sparksGoal && !user.placed && $scope.winners.length < 3){
+            if(user.spent >= user.sparksGoal && !user.placed && $scope.winners.length < $scope.leaderboardSize){
                 $scope.winners.push(user);
                 user.placed = $scope.winners.length;
                 user.show = true;
@@ -264,13 +264,14 @@ app.controller("HelloWorldCtrl", function($scope, $timeout, MixerApi, MixerChatA
     }
     $scope.getUserTop = function(chatUser){
         if(!chatUser) return '0px';
-        if(!chatUser.placed)
+        //if(!chatUser.placed)
             return 64 + chatUser.position * 64 + 'px';
         return '0px';
     };
     $scope.getUserLeft = function(chatUser){
         if(!chatUser) return '0px';
-        if(!chatUser.placed){
+        //if(!chatUser.placed)
+        {
             var pos = $scope.getUserPos(chatUser);
             chatUser.leftText = pos > 40;
             return pos <= 100 ? pos + '%' : '100%';
