@@ -187,8 +187,7 @@ app.controller("HelloWorldCtrl", function($scope, $timeout, MixerApi, MixerChatA
                 var index = $scope.leaderboard.findIndex(function(u){
                     return u && u.userId == user.userId;
                 });
-                //$scope.leaderboard.splice(index,1);
-                $scope.leaderboard[index] = null;
+                // $scope.leaderboard[index] = null;
             }    
         }
         // if($scope.chatUsers[index].placed) return;
@@ -210,7 +209,8 @@ app.controller("HelloWorldCtrl", function($scope, $timeout, MixerApi, MixerChatA
             return $scope.getUserPos(s) - $scope.getUserPos(f);
         });
         tempUsers = tempUsers.filter(function(u){
-            return !u.placed;
+            //return !u.placed;
+            return u;
         });
         var leaderboardSize = Math.min($scope.leaderboardSize, tempUsers.length);
         for(var i = 0; i < leaderboardSize; i++){
