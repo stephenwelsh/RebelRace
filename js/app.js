@@ -175,7 +175,7 @@ app.controller("HelloWorldCtrl", function($scope, $timeout, MixerApi, MixerChatA
         // var index = Math.floor(Math.random() * ($scope.chatUsers.length));
         if(user && spent){
             console.log(`User '${user.userId}' spent: ${spent}`);
-            var userSpent = Math.min($scope.raceSparkGoal*50,spent);
+            var userSpent = Math.min($scope.raceSparkGoal*33,spent);
             user.spent += userSpent;
             if(user.spent >= user.sparksGoal && !user.placed && $scope.winners.length < $scope.leaderboardSize){
                 $scope.winners.push(user);
