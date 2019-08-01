@@ -4,6 +4,7 @@ app.controller("HelloWorldCtrl", function($scope, $timeout, MixerApi, MixerChatA
     $scope.flashClass = [];
     $scope.items = [];
     $scope.leaderboardSize = 15;
+    $scope.raceSparkGoal = 100;
     $scope.leaderboard = [];
     $scope.chatUsers = [];
     $scope.winners = [];
@@ -174,7 +175,8 @@ app.controller("HelloWorldCtrl", function($scope, $timeout, MixerApi, MixerChatA
         // var index = Math.floor(Math.random() * ($scope.chatUsers.length));
         if(user && spent){
             console.log(`User '${user.userId}' spent: ${spent}`);
-            user.spent += spent;
+            var userSpent = Math.min($scope.raceSparkGoal*50,spent);
+            user.spent += userSpent;
             if(user.spent >= user.sparksGoal && !user.placed && $scope.winners.length < 3){
                 $scope.winners.push(user);
                 user.placed = $scope.winners.length;
@@ -303,7 +305,8 @@ app.controller("HelloWorldCtrl", function($scope, $timeout, MixerApi, MixerChatA
                     // chatUser.avatarUrl = user.avatarUrl;
                     chatUser.level = user.level;
                     chatUser.sparks = user.sparks;
-                    chatUser.sparksGoal =  user.sparks/100 * $scope.raceMinSparks + Math.ceil(Math.random() * user.sparks * ($scope.raceMaxSparks - $scope.raceMinSparks)/100);
+                    chatUser.sparksGoal = $scope.raceSparkGoal * 1000;
+                    //chatUser.sparksGoal =  user.sparks/100 * $scope.raceMinSparks + Math.ceil(Math.random() * user.sparks * ($scope.raceMaxSparks - $scope.raceMinSparks)/100);
                     chatUser.spent = 0;
                     chatUser.originalPosition = $scope.leaderboardSize + 1;
                     chatUser.show = false;
