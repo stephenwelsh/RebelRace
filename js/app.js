@@ -4,7 +4,7 @@ app.controller("HelloWorldCtrl", function($scope, $timeout, MixerApi, MixerChatA
     $scope.flashClass = [];
     $scope.items = [];
     $scope.leaderboardSize = 15;
-    $scope.raceSparkGoal = 100;
+    $scope.raceSparkGoal = 10;
     $scope.leaderboard = [];
     $scope.chatUsers = [];
     $scope.winners = [];
