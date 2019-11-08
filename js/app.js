@@ -4,6 +4,7 @@ app.controller("HelloWorldCtrl", function($scope, $timeout, MixerApi, MixerChatA
     $scope.flashClass = [];
     $scope.items = [];
     $scope.leaderboardSize = 15;
+    $scope.raceSparkGoal = 10;
     $scope.leaderboard = [];
     $scope.chatUsers = [];
     $scope.winners = [];
@@ -174,8 +175,9 @@ app.controller("HelloWorldCtrl", function($scope, $timeout, MixerApi, MixerChatA
         // var index = Math.floor(Math.random() * ($scope.chatUsers.length));
         if(user && spent){
             console.log(`User '${user.userId}' spent: ${spent}`);
-            user.spent += spent;
-            if(user.spent >= user.sparksGoal && !user.placed && $scope.winners.length < 3){
+            var userSpent = Math.min($scope.raceSparkGoal*33,spent);
+            user.spent += userSpent;
+            if(user.spent >= user.sparksGoal && !user.placed && $scope.winners.length < $scope.leaderboardSize){
                 $scope.winners.push(user);
                 user.placed = $scope.winners.length;
                 user.show = true;
@@ -185,8 +187,7 @@ app.controller("HelloWorldCtrl", function($scope, $timeout, MixerApi, MixerChatA
                 var index = $scope.leaderboard.findIndex(function(u){
                     return u && u.userId == user.userId;
                 });
-                //$scope.leaderboard.splice(index,1);
-                $scope.leaderboard[index] = null;
+                // $scope.leaderboard[index] = null;
             }    
         }
         // if($scope.chatUsers[index].placed) return;
@@ -208,7 +209,8 @@ app.controller("HelloWorldCtrl", function($scope, $timeout, MixerApi, MixerChatA
             return $scope.getUserPos(s) - $scope.getUserPos(f);
         });
         tempUsers = tempUsers.filter(function(u){
-            return !u.placed;
+            //return !u.placed;
+            return u;
         });
         var leaderboardSize = Math.min($scope.leaderboardSize, tempUsers.length);
         for(var i = 0; i < leaderboardSize; i++){
@@ -262,13 +264,14 @@ app.controller("HelloWorldCtrl", function($scope, $timeout, MixerApi, MixerChatA
     }
     $scope.getUserTop = function(chatUser){
         if(!chatUser) return '0px';
-        if(!chatUser.placed)
+        //if(!chatUser.placed)
             return 64 + chatUser.position * 64 + 'px';
         return '0px';
     };
     $scope.getUserLeft = function(chatUser){
         if(!chatUser) return '0px';
-        if(!chatUser.placed){
+        //if(!chatUser.placed)
+        {
             var pos = $scope.getUserPos(chatUser);
             chatUser.leftText = pos > 40;
             return pos <= 100 ? pos + '%' : '100%';
@@ -303,7 +306,8 @@ app.controller("HelloWorldCtrl", function($scope, $timeout, MixerApi, MixerChatA
                     // chatUser.avatarUrl = user.avatarUrl;
                     chatUser.level = user.level;
                     chatUser.sparks = user.sparks;
-                    chatUser.sparksGoal =  user.sparks/100 * $scope.raceMinSparks + Math.ceil(Math.random() * user.sparks * ($scope.raceMaxSparks - $scope.raceMinSparks)/100);
+                    chatUser.sparksGoal = $scope.raceSparkGoal * 1000;
+                    //chatUser.sparksGoal =  user.sparks/100 * $scope.raceMinSparks + Math.ceil(Math.random() * user.sparks * ($scope.raceMaxSparks - $scope.raceMinSparks)/100);
                     chatUser.spent = 0;
                     chatUser.originalPosition = $scope.leaderboardSize + 1;
                     chatUser.show = false;
