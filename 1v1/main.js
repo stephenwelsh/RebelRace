@@ -1,3 +1,5 @@
+// Uses https://gist.github.com/nicoptere/6198923eb1a8803ae7cea45cd4145219
+
 var urlParams = new URLSearchParams(window.location.search);
 var winner = urlParams.get('winner') || "ScottishRebel67";
 var looser = urlParams.get('looser');
@@ -11,9 +13,6 @@ var requests = [
 if(looser) requests.push("https://mixer.com/api/v1/users/search?query=" + looser);
 if(referee && !hideReferee) requests.push("https://mixer.com/api/v1/users/search?query=" + referee);
 
-// var results = requests.map(request => {
-//     return fetch(request).then(response => { return response.json();});
-// });
 var results = requests.map(async request => {
     const response = await fetch(request);
     return response.json();

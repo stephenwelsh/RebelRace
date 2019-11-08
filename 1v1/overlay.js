@@ -1,3 +1,5 @@
+// Good example of class structure: https://github.com/allensarkisyan/VideoFrame/blob/master/VideoFrame.js
+
 var VideoOverlay = function(options){
     if (this === window) { return new Overlay(options); }
     this.options = options || {};
