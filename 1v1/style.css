@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+}
+.container > *{
+    display: inline-block;
+    position: absolute;
+}
+
+video.source{
+    width: 100%;
+}
+
+img.target{
+    opacity: 0%;;
+    width: 180px;
+}
