@@ -11,10 +11,11 @@
 
 video.source{
     width: 100%;
+    opacity: 0;
 }
 
 img.target{
     border-radius: 200px;
     opacity: 0;
-    width: 150px;
+    width: 220px;
 }
