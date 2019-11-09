@@ -4,6 +4,8 @@ var urlParams = new URLSearchParams(window.location.search);
 var winner = urlParams.get('winner') || "ScottishRebel67";
 var looser = urlParams.get('looser');
 var referee = urlParams.get('referee');
+var timeOffset = urlParams.get('offset');
+if(timeOffset) timeOffset = parseInt(timeOffset);
 var hideReferee = urlParams.get('hideReferee') == "true";
 var video = urlParams.get('video') || "RebelNinja";
 var requests = [
@@ -27,6 +29,7 @@ Promise.all(results).then(r => {
     }));
     new VideoOverlay({
         keyframes: r[0]["winner"],
+        timeOffset: timeOffset,
         source: 'source',
         canvas: 'canvas1',
         target: 'winner',
@@ -42,6 +45,7 @@ Promise.all(results).then(r => {
     }
     new VideoOverlay({
         keyframes: r[0]["looser"],
+        timeOffset: timeOffset,
         source: 'source',
         canvas: 'canvas2',
         target: 'looser',
@@ -58,6 +62,7 @@ Promise.all(results).then(r => {
         }
         new VideoOverlay({
             keyframes: r[0]["referee"],
+            timeOffset: timeOffset,
             source: 'source',
             canvas: 'canvas3',
             target: 'referee',
@@ -68,6 +73,8 @@ Promise.all(results).then(r => {
     Promise.all(targets).then(r =>{
         var source = document.getElementById('source');
         source.setAttribute('src', video + ".mp4");
+        var targets = document.querySelectorAll("img.target");
+        targets.forEach(t => t.style.opacity = 1);
     });
     winner.src = winnerUser.avatarUrl;
 });

@@ -49,6 +49,12 @@ VideoOverlay.prototype = {
         ctx.drawImage(this.target, x, y, w, h);
         ctx.globalCompositeOperation = 'source-over';
     },
+    updateTarget: function(){
+        var x = this.targetX - this.target.width/2 * this.scaleX;
+        var y = this.targetY - this.target.height/2 * this.scaleY;
+        this.target.style.left = x + "px";
+        this.target.style.top = y + "px";
+    },
     resizeCanvas: function(w,h){
         if(this.canvas && (this.canvas.width != w || this.canvas.height != h)){
             this.canvas.width = w;
@@ -83,7 +89,8 @@ VideoOverlay.prototype.frameCallback = function(timestamp){
                     this.scaleY = this.options.scale * this.video.clientHeight / this.video.videoHeight;
                     this.targetX = ((position[1] + this.options.targetOffsetX) * this.scaleX).toFixed(0);
                     this.targetY = ((position[2] + this.options.targetOffsetY) * this.scaleY).toFixed(0);
-                    this.drawFrame(this.ctx);
+                    // this.drawFrame(this.ctx);
+                    this.updateTarget();
                 }
             }
         }
