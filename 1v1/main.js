@@ -4,6 +4,7 @@ var urlParams = new URLSearchParams(window.location.search);
 var winner = urlParams.get('winner') || "ScottishRebel67";
 var looser = urlParams.get('looser');
 var referee = urlParams.get('referee');
+var playbackRate = urlParams.get('rate');
 var loop = urlParams.get('loop') == "true";
 var timeOffset = urlParams.get('offset');
 if(timeOffset) timeOffset = parseInt(timeOffset);
@@ -83,6 +84,7 @@ Promise.all(results).then(r => {
         var source = document.getElementById('source');
         var targets = document.querySelectorAll("img.target");
         source.addEventListener('playing', (event) => {
+            if(playbackRate) source.playbackRate = parseFloat(playbackRate);
             targets.forEach(t => {
                 t.style.opacity = 1;
             });
