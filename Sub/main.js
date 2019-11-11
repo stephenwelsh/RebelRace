@@ -59,7 +59,7 @@ Promise.all(results).then(r => {
             gift.onload = ()=>{
                 resolve();
                 new VideoOverlay({
-                    keyframes: r[0]["gift"],
+                    keyframes: r[0]["gifted"],
                     timeOffset: timeOffset,
                     source: 'source',
                     target: 'gift'
@@ -91,6 +91,7 @@ Promise.all(results).then(r => {
         // ['playing','ended','play','loadeddata', 'canplay'].forEach(evt => source.addEventListener(evt,event => {
         //     console.log(event);
         // }));
+        if(gift) video += "Gifted";
         source.setAttribute('src', video + ".webm");
         if(loop) source.setAttribute('loop','');
     });
