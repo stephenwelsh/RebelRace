@@ -85,7 +85,10 @@ Promise.all(results).then(r => {
             source.style.opacity = 0;
             document.getElementById('background').style.opacity = 0;
         });
-        // ['playing','ended','play','loadeddata'].forEach(evt => source.addEventListener(evt,event => {
+        source.addEventListener('canplay', (event) => {
+            source.play();
+        });
+        // ['playing','ended','play','loadeddata', 'canplay'].forEach(evt => source.addEventListener(evt,event => {
         //     console.log(event);
         // }));
         source.setAttribute('src', video + ".webm");
