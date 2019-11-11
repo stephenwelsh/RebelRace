@@ -1,0 +1,33 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+}
+.container > * {
+    display: inline-block;
+    position: absolute;
+}
+
+video.source{
+    width: 100%;
+    opacity: 0;
+}
+
+img.target{
+    border-radius: 200px;
+    opacity: 0;
+    /* width: 10px; */
+}
+.container div{
+    width: 100%;
+    background-color: black;
+}
+
+#sub1{
+    width: 303px;
+}
+
+#sub2{
+    width: 372px;
+}
