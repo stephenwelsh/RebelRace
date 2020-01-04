@@ -37,7 +37,10 @@ Promise.all(results).then(r => {
             });        
         };
     }));
-    winner.src = winnerUser.avatarUrl;
+    if(winnerUser.avatarUrl)
+        winner.src = winnerUser.avatarUrl;
+    else
+        winner.src = "https://mixer.com/api/v1/users/" + winnerUser.id + "/avatar?w=128&h=128";
     if(r.length > 2){
         var looserUser = r[2][0];
         var looser = document.getElementById('looser');
@@ -52,7 +55,10 @@ Promise.all(results).then(r => {
                 });                    
             };    
         }));
-        looser.src = looserUser.avatarUrl;
+        if(winnerUser.avatarUrl)
+            looser.src = looserUser.avatarUrl;
+        else
+            looser.src = "https://mixer.com/api/v1/users/" + looserUser.id + "/avatar?w=128&h=128";
     }
     else
     {

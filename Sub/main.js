@@ -36,7 +36,10 @@ Promise.all(results).then(r => {
             });        
         };
     }));
-    sub1.src = subUser.avatarUrl;
+    if(subUser.avatarUrl)
+        sub1.src = subUser.avatarUrl;
+    else
+        sub1.src = "https://mixer.com/api/v1/users/" + subUser.id + "/avatar?w=128&h=128";
     var sub2 = document.getElementById('sub2');
     targets.push(new Promise(resolve => {
         sub2.onload = ()=>{
@@ -51,7 +54,10 @@ Promise.all(results).then(r => {
             });        
         };
     }));
-    sub2.src = subUser.avatarUrl;
+    if(subUser.avatarUrl)
+        sub2.src = subUser.avatarUrl;
+    else
+        sub2.src = "https://mixer.com/api/v1/users/" + subUser.id + "/avatar?w=128&h=128";
     if(r.length > 2){
         var giftUser = r[2][0];
         var gift = document.getElementById('gift');
@@ -66,7 +72,10 @@ Promise.all(results).then(r => {
                 });                    
             };    
         }));
-        gift.src = giftUser.avatarUrl;
+        if(giftUser.avatarUrl)
+            gift.src = giftUser.avatarUrl;
+        else
+            gift.src = "https://mixer.com/api/v1/users/" + giftUser.id + "/avatar?w=128&h=128";        
     }
     Promise.all(targets).then(r =>{
         var source = document.getElementById('source');

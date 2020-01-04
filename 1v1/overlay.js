@@ -3,7 +3,7 @@
 var VideoOverlay = function(options){
     if (this === window) { return new Overlay(options); }
     this.options = options || {};
-    this.options.timeOffset = this.options.timeOffset || -48;
+    this.options.timeOffset = (this.options.timeOffset || 0)/1000;
     this.options.timeTollerance = this.options.timeTollerance || 8;
     this.options.scale = this.options.scale || 1;
     this.options.source = this.options.source || 'source';  // Video source to overlay target on
@@ -42,7 +42,7 @@ VideoOverlay.prototype.frameCallback = function(timestamp){
             var timeMap = this.options.keyframes.times.map((f,i) => {
                 return {
                     index: i,
-                    delta: Math.abs(this.videoTime - f)
+                    delta: Math.abs(this.videoTime + this.options.timeOffset - f)
                 };
             });
             timeMap.sort((a,b) => a.delta - b.delta);
